@@ -17,7 +17,7 @@
   "content_scripts": [
     {
       "matches": ["https://x.com/*", "https://twitter.com/*"],
-      "js": ["lib/settings.js", "lib/filters.js", "lib/seen.js", "content/content.js"],
+      "js": ["lib/settings.js", "lib/filters.js", "lib/seen.js", "lib/keys.js", "content/content.js"],
       "css": ["content/styles.css"],
       "run_at": "document_start"
     }

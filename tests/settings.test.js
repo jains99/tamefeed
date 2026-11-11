@@ -41,3 +41,16 @@ test('toCssVars exposes font and width', () => {
   assert.strictEqual(v['--xe-line-height'], '1.6');
   assert.strictEqual(v['--xe-column-width'], '640px');
 });
+
+test('toAttributes with peek omits image/video blocking but keeps other options', () => {
+  const a = S.toAttributes(S.merge({ images: 'hide', videos: 'blur', minimal: true }), { peek: true });
+  assert.strictEqual(a['data-xe-images'], undefined);
+  assert.strictEqual(a['data-xe-videos'], undefined);
+  assert.strictEqual(a['data-xe-minimal'], '1');
+});
+
+test('mediaShortcut defaults on and is boolean-validated', () => {
+  assert.strictEqual(S.DEFAULTS.mediaShortcut, true);
+  assert.strictEqual(S.merge({ mediaShortcut: 'yes' }).mediaShortcut, true);
+  assert.strictEqual(S.merge({ mediaShortcut: false }).mediaShortcut, false);
+});

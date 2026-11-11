@@ -3,7 +3,7 @@
  * All DOM selectors live in SEL so X markup changes are a one-line fix. */
 (function () {
   'use strict';
-  const Settings = self.XESettings, Filters = self.XEFilters, Seen = self.XESeen;
+  const Settings = self.XESettings, Filters = self.XEFilters, Seen = self.XESeen, Keys = self.XEKeys;
   const SEEN_CAP = 5000;
 
   const SEL = {
@@ -19,12 +19,13 @@
   let muteRules = [], exemptions = [];
   let seenList = [], seenAtLoad = new Set(), seenDirty = false;
   let io = null, timer = null, followingDone = false;
+  let peek = false; // 'v' shows all blocked media; resets on page load
   const root = document.documentElement;
 
   /* ---------- settings -> DOM ---------- */
   function applySettings() {
     for (const n of root.getAttributeNames()) if (n.startsWith('data-xe-')) root.removeAttribute(n);
-    const attrs = Settings.toAttributes(settings);
+    const attrs = Settings.toAttributes(settings, { peek });
     for (const k in attrs) root.setAttribute(k, attrs[k]);
     const vars = Settings.toCssVars(settings);
     for (const k in vars) root.style.setProperty(k, vars[k]);
@@ -149,11 +150,21 @@
   }, true);
 
   // 'x' collapses the focused (or first visible) post. X natively handles j/k/l.
+  function keyEvent(e) {
+    const t = e.target || {};
+    return { key: e.key, ctrlKey: e.ctrlKey, metaKey: e.metaKey, altKey: e.altKey, shiftKey: e.shiftKey,
+      tagName: t.tagName, isContentEditable: t.isContentEditable };
+  }
+
+  // 'v' peeks: shows all blurred/hidden media in the timeline, press again to re-block.
   document.addEventListener('keydown', (e) => {
-    if (!settings.enabled || !settings.keyboard || e.key !== 'x') return;
-    if (e.ctrlKey || e.metaKey || e.altKey) return;
-    const t = e.target;
-    if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
+    if (!settings.enabled || !settings.mediaShortcut || !Keys.isPlainKey(keyEvent(e), 'v')) return;
+    peek = !peek;
+    applySettings();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (!settings.enabled || !settings.keyboard || !Keys.isPlainKey(keyEvent(e), 'x')) return;
     let a = document.activeElement && document.activeElement.closest && document.activeElement.closest(SEL.tweet);
     if (!a) a = [...document.querySelectorAll(SEL.tweet)].find(x => x.getBoundingClientRect().bottom > 80);
     if (a) toggleCollapse(a);

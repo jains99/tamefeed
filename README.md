@@ -10,13 +10,13 @@ Chrome (MV3) extension for x.com / twitter.com. Does what Twitter Media Blocker 
 ## Features
 | Tab | Options |
 |---|---|
-| Media | Images/videos: show, blur (click to reveal) or hide. Hide Trending and Who to follow. Per-account media exceptions. |
+| Media | Images/videos: show, blur (click to reveal) or hide. Hide Trending and Who to follow. Per-account media exceptions. Press `v` to show all blocked media in the timeline, press again to re-block (resets on page reload). |
 | Feed | Minimal mode, density (large/compact/text-only), dim or hide seen posts, collapse button and `x` key, open Following tab, hide counts. |
 | Filters | Hide ads and Premium/Grok upsells, hide reposts, quotes or replies, mute list (words, `@accounts`, `/regex/i`). |
 | Look | Themes (AMOLED, Sepia, Nord, Solarized), accent, font, size, line height, minimal column width. |
 
 Notes:
-- X already supports `j`/`k` (next/previous) and `l` (like), so the extension only adds `x` to collapse.
+- X already supports `j`/`k` (next/previous) and `l` (like), so the extension only adds `x` (collapse) and `v` (peek at all media). Shortcuts are ignored in text fields and with Ctrl/Cmd/Alt/Shift held.
 - Seen tracking records post ids you scrolled past (max 5000, stored locally). Dim/hide applies on the next page load.
 - Themes and density are best-effort overrides; X's markup changes often.
 

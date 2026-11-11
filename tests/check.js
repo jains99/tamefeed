@@ -22,3 +22,11 @@ if (keysUsed.length !== 1 || keysUsed[0] !== 'v') {
   process.exit(1);
 }
 console.log('shortcut guard ok');
+
+// Guard: a negative margin on the action row ([role="group"]) pulled it over the post text in compact density.
+const stylesCss = fs.readFileSync(path.join(root, 'content/styles.css'), 'utf8');
+if (/\[role="group"\]\s*\{[^}]*margin-top:\s*-/.test(stylesCss)) {
+  console.error('styles.css: negative margin-top on [role="group"] makes the action row overlap post text');
+  process.exit(1);
+}
+console.log('overlap guard ok');

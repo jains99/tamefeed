@@ -76,7 +76,6 @@ html[data-xe-font="system"] body, html[data-xe-font="system"] body * { font-fami
 html[data-xe-density="compact"] [data-testid="tweetText"] { font-size: calc(var(--xe-font-size, 15px) - 1px) !important; }
 html[data-xe-density="compact"] article [data-testid="tweetPhoto"],
 html[data-xe-density="compact"] article [data-testid="videoPlayer"] { max-height: 150px; overflow: hidden; }
-html[data-xe-density="compact"] article [role="group"] { margin-top: -6px; }
 html[data-xe-density="text"] article [data-testid="tweetPhoto"],
 html[data-xe-density="text"] article [data-testid="videoPlayer"],
 html[data-xe-density="text"] article [data-testid="card.wrapper"],

@@ -20,7 +20,7 @@ The popup is one scrolling page with these sections:
 Notes:
 - The only keyboard shortcut is `v` (peek at all media) plus Alt+M (master switch). X itself binds many plain letters (for example `x` opens the Block dialog, `u` mute, `b`, `l`, `r`, `t`, `s`, `n`), so the extension deliberately registers no others; posts collapse via the – button. `v` is ignored in text fields and with Ctrl/Cmd/Alt/Shift held. `tests/check.js` guards this.
 - Seen tracking records post ids you scrolled past (max 5000, stored locally). Dim/hide applies on the next page load.
-- Themes and density are best-effort overrides; X's markup changes often.
+- Themes and density are best-effort overrides; X's markup changes often. `tests/theme.test.js` checks every theme palette for 4.5:1 contrast (text, muted text, links).
 
 ## Develop
 - `npm test` runs unit tests (`node --test`) and static checks (manifest, syntax).

@@ -98,22 +98,52 @@ html[data-xe-minimal] [data-testid="primaryColumn"] {
 }
 html[data-xe-minimal] article [data-testid="Tweet-User-Avatar"] { transform: scale(.8); transform-origin: top left; }
 
-/* ---- Themes (best effort; X styles via classes so we set key surfaces) ---- */
+/* ---- Themes (best effort; X styles via hashed classes, so we override key surfaces) ---- */
 html[data-xe-theme] { --xe-accent: #1d9bf0; }
-html[data-xe-theme="amoled"]    { --xe-bg:#000;    --xe-fg:#e7e9ea; --xe-border:#1c1c1c; }
-html[data-xe-theme="sepia"]     { --xe-bg:#f4ecd8; --xe-fg:#433422; --xe-border:#d9ccae; }
-html[data-xe-theme="nord"]      { --xe-bg:#2e3440; --xe-fg:#eceff4; --xe-border:#434c5e; --xe-accent:#88c0d0; }
-html[data-xe-theme="solarized"] { --xe-bg:#002b36; --xe-fg:#93a1a1; --xe-border:#0b3c49; --xe-accent:#268bd2; }
+html[data-xe-theme="amoled"]    { --xe-bg:#000000; --xe-fg:#e7e9ea; --xe-muted:#8b98a5; --xe-border:#2f3336; }
+html[data-xe-theme="sepia"]     { --xe-bg:#f4ecd8; --xe-fg:#433422; --xe-muted:#6b5a45; --xe-border:#d9ccae; --xe-accent:#0b5fa5; }
+html[data-xe-theme="nord"]      { --xe-bg:#2e3440; --xe-fg:#eceff4; --xe-muted:#a3adbd; --xe-border:#434c5e; --xe-accent:#88c0d0; }
+html[data-xe-theme="solarized"] { --xe-bg:#002b36; --xe-fg:#93a1a1; --xe-muted:#839496; --xe-border:#0b3c49; --xe-accent:#4aa3e8; }
+
+/* Surfaces: page, rails, and every wrapper around the sticky tab bar and the composer
+   (X gives those their own white background, which otherwise shows as white bars). */
 html[data-xe-theme] body,
 html[data-xe-theme] header[role="banner"],
 html[data-xe-theme] [data-testid="primaryColumn"],
 html[data-xe-theme] [data-testid="sidebarColumn"],
-html[data-xe-theme] main[role="main"] { background-color: var(--xe-bg) !important; }
+html[data-xe-theme] main[role="main"],
+html[data-xe-theme] [data-testid="primaryColumn"] div:has([role="tablist"]),
+html[data-xe-theme] [data-testid="primaryColumn"] div:has([data-testid="tweetTextarea_0"]) { background-color: var(--xe-bg) !important; }
+
+/* Baseline: any text inside a post (quote-card labels, "Paid partnership", ...) uses the theme text colour. */
+html[data-xe-theme] article span:not([role="button"] *):not(button *) { color: var(--xe-fg) !important; }
+
+/* Primary text */
 html[data-xe-theme] [data-testid="tweetText"],
 html[data-xe-theme] [data-testid="User-Name"] span,
-html[data-xe-theme] [data-testid="tweetText"] span:not(a *) { color: var(--xe-fg) !important; }
+html[data-xe-theme] [data-testid="tweetText"] span:not(a *),
+html[data-xe-theme] header[role="banner"] nav a span,
+html[data-xe-theme] [data-testid="SideNav_AccountSwitcher_Button"] span,
+html[data-xe-theme] [role="tablist"] [aria-selected="true"] span { color: var(--xe-fg) !important; }
+html[data-xe-theme] header[role="banner"] nav a svg,
+html[data-xe-theme] header[role="banner"] nav a div { color: var(--xe-fg) !important; }
+
+/* Secondary text: timestamps, inactive tabs, composer placeholder, repost/"replying to" lines, action counts */
+html[data-xe-theme] [data-testid="User-Name"] time,
+html[data-xe-theme] [data-testid="User-Name"] time span,
+html[data-xe-theme] [role="tablist"] [aria-selected="false"] span,
+html[data-xe-theme] [data-testid="tweetTextarea_0"],
+html[data-xe-theme] [data-testid="tweetTextarea_0"] span,
+html[data-xe-theme] [data-testid="socialContext"] span,
+html[data-xe-theme] article [role="group"] span { color: var(--xe-muted) !important; }
+
+/* Links / accent */
 html[data-xe-theme] [data-testid="tweetText"] a,
-html[data-xe-theme] [data-testid="tweetText"] a span { color: var(--xe-accent) !important; }
+html[data-xe-theme] [data-testid="tweetText"] a span,
+html[data-xe-theme] [data-testid="tweet-text-show-more-link"],
+html[data-xe-theme] [data-testid="tweet-text-show-more-link"] span { color: var(--xe-accent) !important; }
+
+/* Borders */
 html[data-xe-theme] [data-testid="primaryColumn"] { border-color: var(--xe-border) !important; }
 html[data-xe-theme] [data-testid="cellInnerDiv"] > div { border-color: var(--xe-border) !important; }
 

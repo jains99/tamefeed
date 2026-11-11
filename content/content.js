@@ -18,7 +18,7 @@
   let settings = Settings.merge();
   let muteRules = [], exemptions = [];
   let seenList = [], seenAtLoad = new Set(), seenDirty = false;
-  let io = null, timer = null, followingDone = false;
+  let io = null, timer = null, followingDone = false, lastPath = '';
   let peek = false; // 'v' shows all blocked media; resets on page load
   const root = document.documentElement;
 
@@ -32,20 +32,21 @@
     if (!settings.accent) root.style.removeProperty('--xe-accent');
     muteRules = Filters.parseMutes(settings.mutes);
     exemptions = Filters.parseHandles(settings.exceptions);
-    followingDone = false;
     document.querySelectorAll(SEL.tweet).forEach(a => { a.removeAttribute('data-xe-done'); process(a); });
     schedule();
   }
 
   /* ---------- per-tweet processing ---------- */
   function handleOf(a) {
-    const links = a.querySelectorAll(SEL.userName + ' a[href^="/"]');
+    const block = a.querySelector(SEL.userName); // first block = poster; a quoted tweet's block comes later
+    const links = block ? block.querySelectorAll('a[href^="/"]') : [];
     const href = links.length ? links[links.length - 1].getAttribute('href') : '';
     return href.split('/')[1] || '';
   }
   function idOf(a) {
     const t = a.querySelector('a[href*="/status/"] time');
-    const m = t && t.parentElement.getAttribute('href').match(/status\/(\d+)/);
+    const link = t && t.closest('a');
+    const m = link && (link.getAttribute('href') || '').match(/status\/(\d+)/);
     return m ? m[1] : null;
   }
   function isAd(a) {
@@ -121,6 +122,7 @@
 
   /* ---------- misc ---------- */
   function openFollowingTab() {
+    if (location.pathname !== lastPath) { lastPath = location.pathname; followingDone = false; } // re-arm per navigation
     if (!settings.enabled || !settings.followingTab || followingDone || location.pathname !== '/home') return;
     for (const t of document.querySelectorAll('[role="tab"]')) {
       if (t.textContent.trim() === 'Following') {
@@ -140,9 +142,9 @@
 
   // Click-to-reveal for blurred media
   document.addEventListener('click', (e) => {
-    const m = e.target.closest && e.target.closest('[data-testid="tweetPhoto"], [data-testid="videoPlayer"]');
+    const m = e.target.closest && e.target.closest('[data-testid="tweetPhoto"], [data-testid="videoPlayer"], [data-testid="card.layoutLarge.media"]');
     if (!m) return;
-    const mode = m.matches('[data-testid="tweetPhoto"]') ? 'data-xe-images' : 'data-xe-videos';
+    const mode = m.matches('[data-testid="videoPlayer"]') ? 'data-xe-videos' : 'data-xe-images';
     if (root.getAttribute(mode) === 'blur' && !m.hasAttribute('data-xe-reveal') && !m.closest('[data-xe-exempt]')) {
       e.preventDefault(); e.stopPropagation();
       m.setAttribute('data-xe-reveal', '1');
@@ -164,7 +166,7 @@
   });
 
   document.addEventListener('keydown', (e) => {
-    if (!settings.enabled || !settings.keyboard || !Keys.isPlainKey(keyEvent(e), 'x')) return;
+    if (!settings.enabled || !settings.keyboard || !settings.collapseThreads || !Keys.isPlainKey(keyEvent(e), 'x')) return;
     let a = document.activeElement && document.activeElement.closest && document.activeElement.closest(SEL.tweet);
     if (!a) a = [...document.querySelectorAll(SEL.tweet)].find(x => x.getBoundingClientRect().bottom > 80);
     if (a) toggleCollapse(a);
@@ -172,6 +174,7 @@
 
   /* ---------- boot ---------- */
   function boot() {
+    applySettings(); // defaults first, so media is never shown unblocked while storage loads
     new MutationObserver(schedule).observe(document.documentElement, { childList: true, subtree: true });
     setupSeen();
     chrome.storage.local.get('seen', (r) => {
@@ -179,9 +182,9 @@
       seenAtLoad = new Set(seenList);
       schedule();
     });
-    chrome.storage.sync.get('settings', (r) => { settings = Settings.merge(r.settings); applySettings(); });
+    chrome.storage.local.get('settings', (r) => { settings = Settings.merge(r.settings); applySettings(); });
     chrome.storage.onChanged.addListener((ch, area) => {
-      if (area === 'sync' && ch.settings) { settings = Settings.merge(ch.settings.newValue); applySettings(); }
+      if (area === 'local' && ch.settings) { settings = Settings.merge(ch.settings.newValue); applySettings(); }
     });
   }
   boot();

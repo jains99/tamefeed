@@ -51,3 +51,22 @@ test('seen add dedupes and caps, evicting oldest', () => {
   l = Seen.add(l, '3', 3); l = Seen.add(l, '4', 3);
   assert.deepStrictEqual(l, ['1', '3', '4']);
 });
+
+test('regex g/y flags are stripped so matching is stateless', () => {
+  const r = F.parseMutes('/giveaway/gi');
+  const post = { text: 'GIVEAWAY today', handle: 'a' };
+  assert.ok(F.shouldMute(r, post));
+  assert.ok(F.shouldMute(r, post));
+  assert.ok(F.shouldMute(r, post));
+});
+
+test('mute rules split on newlines only, so commas survive', () => {
+  assert.strictEqual(F.parseMutes('hello, world').length, 1);
+  const r = F.parseMutes('/a{1,3}b/i');
+  assert.strictEqual(r.length, 1);
+  assert.ok(F.shouldMute(r, { text: 'xAAb', handle: 'q' }));
+});
+
+test('handle lists still accept commas', () => {
+  assert.deepStrictEqual(F.parseHandles('a, @b\nc'), ['a', 'b', 'c']);
+});

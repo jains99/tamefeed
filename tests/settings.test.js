@@ -54,3 +54,9 @@ test('mediaShortcut defaults on and is boolean-validated', () => {
   assert.strictEqual(S.merge({ mediaShortcut: 'yes' }).mediaShortcut, true);
   assert.strictEqual(S.merge({ mediaShortcut: false }).mediaShortcut, false);
 });
+
+test('collapse attribute follows collapseThreads and master switch', () => {
+  assert.strictEqual(S.toAttributes(S.merge({ collapseThreads: true }))['data-xe-collapse'], '1');
+  assert.strictEqual(S.toAttributes(S.merge({ collapseThreads: false }))['data-xe-collapse'], undefined);
+  assert.strictEqual(S.toAttributes(S.merge({ enabled: false, collapseThreads: true }))['data-xe-collapse'], undefined);
+});

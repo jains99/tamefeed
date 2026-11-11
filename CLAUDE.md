@@ -6,6 +6,8 @@ Chrome MV3 extension for X. See README.md for features.
 - `lib/*.js`: UMD modules (browser global + `require`) holding all testable logic: `settings.js` (defaults, validation, `toAttributes`, `toCssVars`), `filters.js` (mute rules, exceptions, tweet classification), `seen.js`, `keys.js` (shortcut matching). `toAttributes(settings, {peek})` drops image/video blocking while peeking; `peek` is in-memory state in `content.js`, never persisted.
 - `content/content.js`: loads settings, sets `data-xe-*` attributes on `<html>`, processes tweets via one debounced MutationObserver. Selectors live in `SEL`.
 - `content/styles.css`: every visual feature is a rule keyed on `html[data-xe-*]`.
+- Storage: settings in `chrome.storage.local` (`settings`), seen ids in `chrome.storage.local` (`seen`). Do not use sync (8 KB/item quota).
+- Safe defaults: `content.js` calls `applySettings()` with defaults at boot so media is blurred before stored settings load.
 - `popup/`: shared by the toolbar popup and the options page; generic `[data-key]` binding in `popup.js`.
 - `background.js`: Alt+M toggle.
 

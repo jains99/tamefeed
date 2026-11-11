@@ -14,7 +14,7 @@ The popup is one scrolling page with these sections:
 |---|---|
 | Media | Images/videos: show, blur (click to reveal) or hide. Hide Trending and Who to follow. Per-account media exceptions. Press `v` to show all blocked media in the timeline, press again to re-block (resets on page reload). |
 | Feed | Minimal mode, density (large/compact/text-only), dim or hide seen posts, collapse button and `x` key, open Following tab, hide counts. |
-| Filters | Hide ads and Premium/Grok upsells, hide reposts, quotes or replies, mute list (words, `@accounts`, `/regex/i`). |
+| Filters | Hide ads and Premium/Grok upsells, hide reposts, quotes or replies, mute list (words, `@accounts`, `/regex/i`; one rule per line, `g`/`y` flags ignored). |
 | Look | Themes (AMOLED, Sepia, Nord, Solarized), accent, font, size, line height, minimal column width. |
 
 Notes:
@@ -25,5 +25,5 @@ Notes:
 ## Develop
 - `npm test` runs unit tests (`node --test`) and static checks (manifest, syntax).
 - Pure logic is in `lib/` (settings, filters, seen) and unit-tested. DOM selectors are in `content/content.js` (`SEL`) and `content/styles.css`; fix there when X changes.
-- Settings: `chrome.storage.sync` (`settings`). Seen ids: `chrome.storage.local` (`seen`).
+- Settings: `chrome.storage.local` (`settings`; local rather than sync because sync's 8 KB per-item quota breaks long mute lists, so settings do not follow you across devices). Seen ids: `chrome.storage.local` (`seen`).
 - Permissions: `storage` and x.com/twitter.com hosts only. No data leaves the browser.

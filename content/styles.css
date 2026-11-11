@@ -15,6 +15,15 @@ html[data-xe-videos="blur"] [data-testid="videoPlayer"]:not([data-xe-reveal]):no
   cursor: pointer;
 }
 
+/* Wrapper boxes (data-xe-box, set by content.js) vanish with their media, leaving no empty bordered box. */
+html[data-xe-images="hide"] [data-xe-box="images"]:not(article[data-xe-exempt] *),
+html[data-xe-images="hide"] [data-xe-box="both"]:not(article[data-xe-exempt] *),
+html[data-xe-videos="hide"] [data-xe-box="videos"]:not(article[data-xe-exempt] *),
+html[data-xe-videos="hide"] [data-xe-box="both"]:not(article[data-xe-exempt] *),
+html[data-xe-density="text"] [data-xe-box] {
+  display: none !important;
+}
+
 /* ---- Sidebar clutter ---- */
 html[data-xe-trending="hide"] [data-testid="trend"],
 html[data-xe-trending="hide"] section[aria-labelledby][role="region"]:has([data-testid="trend"]),

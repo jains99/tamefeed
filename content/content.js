@@ -3,7 +3,7 @@
  * All DOM selectors live in SEL so X markup changes are a one-line fix. */
 (function () {
   'use strict';
-  const Settings = self.XESettings, Filters = self.XEFilters, Seen = self.XESeen, Keys = self.XEKeys;
+  const Settings = self.XESettings, Filters = self.XEFilters, Seen = self.XESeen, Keys = self.XEKeys, MediaBox = self.XEMediaBox;
   const SEEN_CAP = 5000;
 
   const SEL = {
@@ -133,8 +133,30 @@
     }
   }
 
+  // Media loads after the tweet is first processed, so scan separately for new media elements and
+  // tag the wrapper box around each (data-xe-box) so hiding media does not leave an empty bordered box.
+  const MEDIA = {
+    images: '[data-testid="tweetPhoto"], [data-testid="card.layoutLarge.media"]',
+    videos: '[data-testid="videoPlayer"], [data-testid="videoComponent"]'
+  };
+  const SHARED = SEL.text + ', ' + SEL.userName + ', [role="group"]';
+  function markMediaBoxes() {
+    for (const kind of ['images', 'videos']) {
+      const q = MEDIA[kind].split(', ').map(s => s + ':not([data-xe-boxed])').join(', ');
+      document.querySelectorAll(q).forEach((el) => {
+        const art = el.closest(SEL.tweet);
+        if (!art) return;
+        el.setAttribute('data-xe-boxed', '1');
+        const box = MediaBox.mediaBox(el, art, p => !!p.querySelector(SHARED));
+        const prev = box.getAttribute('data-xe-box');
+        box.setAttribute('data-xe-box', prev && prev !== kind ? 'both' : kind);
+      });
+    }
+  }
+
   function tick() {
     timer = null;
+    markMediaBoxes();
     document.querySelectorAll(SEL.tweet + ':not([data-xe-done])').forEach(process);
     openFollowingTab();
   }

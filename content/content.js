@@ -176,8 +176,17 @@
   // 'x' collapses the focused (or first visible) post. X natively handles j/k/l.
   function keyEvent(e) {
     const t = e.target || {};
-    return { key: e.key, ctrlKey: e.ctrlKey, metaKey: e.metaKey, altKey: e.altKey, shiftKey: e.shiftKey,
+    return { key: e.key, code: e.code, ctrlKey: e.ctrlKey, metaKey: e.metaKey, altKey: e.altKey, shiftKey: e.shiftKey,
       tagName: t.tagName, isContentEditable: t.isContentEditable };
+  }
+
+  let toastEl = null, toastTimer = null;
+  function toast(msg) {
+    if (!toastEl) { toastEl = document.createElement('div'); toastEl.className = 'xe-toast'; document.documentElement.appendChild(toastEl); }
+    toastEl.textContent = msg;
+    toastEl.setAttribute('data-show', '1');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.removeAttribute('data-show'), 1500);
   }
 
   // 'v' peeks: shows all blurred/hidden media in the timeline, press again to re-block.
@@ -185,7 +194,8 @@
     if (!settings.enabled || !settings.mediaShortcut || !Keys.isPlainKey(keyEvent(e), 'v')) return;
     peek = !peek;
     applySettings();
-  });
+    toast(peek ? 'Media shown (press V to re-block)' : 'Media blocked');
+  }, true); // capture phase: runs before X's own key handlers can swallow the event
 
   document.addEventListener('keydown', (e) => {
     if (!settings.enabled || !settings.keyboard || !settings.collapseThreads || !Keys.isPlainKey(keyEvent(e), 'x')) return;

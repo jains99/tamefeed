@@ -14,3 +14,7 @@ test('typing targets are rejected', () => {
     assert.ok(!K.isPlainKey({ key: 'v', tagName: t }, 'v'), t);
   assert.ok(!K.isPlainKey({ key: 'v', tagName: 'DIV', isContentEditable: true }, 'v'));
 });
+
+test('Caps Lock (uppercase key) still matches', () => assert.ok(K.isPlainKey({ key: 'V', code: 'KeyV', tagName: 'DIV' }, 'v')));
+test('non-Latin layouts match by physical key code', () => assert.ok(K.isPlainKey({ key: 'м', code: 'KeyV', tagName: 'DIV' }, 'v')));
+test('Shift+V is still rejected', () => assert.ok(!K.isPlainKey({ key: 'V', code: 'KeyV', shiftKey: true, tagName: 'DIV' }, 'v')));

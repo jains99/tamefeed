@@ -116,3 +116,11 @@ html[data-xe-theme] [data-testid="tweetText"] a,
 html[data-xe-theme] [data-testid="tweetText"] a span { color: var(--xe-accent) !important; }
 html[data-xe-theme] [data-testid="primaryColumn"] { border-color: var(--xe-border) !important; }
 html[data-xe-theme] [data-testid="cellInnerDiv"] > div { border-color: var(--xe-border) !important; }
+
+/* ---- Toast shown when 'v' toggles media ---- */
+.xe-toast {
+  position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%); z-index: 2147483647;
+  padding: 8px 14px; border-radius: 999px; background: #0f1419; color: #fff; font: 13px system-ui, sans-serif;
+  opacity: 0; pointer-events: none; transition: opacity .15s;
+}
+.xe-toast[data-show] { opacity: .92; }

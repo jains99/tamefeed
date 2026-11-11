@@ -12,7 +12,7 @@ The popup is one scrolling page with these sections:
 
 | Section | Options |
 |---|---|
-| Media | Images/videos: show, blur (click to reveal) or hide. Hide Trending and Who to follow. Per-account media exceptions. Press `v` to show all blocked media in the timeline, press again to re-block (resets on page reload). |
+| Media | Images/videos: show, blur (click to reveal) or hide. Hide Trending and Who to follow. Per-account media exceptions. Press `v` to show all blocked media in the timeline, press again to re-block (resets on page reload). A small toast confirms each press. |
 | Feed | Minimal mode, density (large/compact/text-only), dim or hide seen posts, collapse button and `x` key, open Following tab, hide counts. |
 | Filters | Hide ads and Premium/Grok upsells, hide reposts, quotes or replies, mute list (words, `@accounts`, `/regex/i`; one rule per line, `g`/`y` flags ignored). |
 | Look | Themes (AMOLED, Sepia, Nord, Solarized), accent, font, size, line height, minimal column width. |

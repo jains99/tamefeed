@@ -1,0 +1,109 @@
+/* X Enhancer v0.1.0 - all rules keyed off data-xe-* attributes on <html>.
+ * Selectors rely on X's data-testid hooks; update here if X changes markup. */
+
+/* ---- Media blocking (exempt accounts keep their media) ---- */
+html[data-xe-images="hide"] [data-testid="tweetPhoto"]:not(article[data-xe-exempt] *),
+html[data-xe-images="hide"] [data-testid="card.layoutLarge.media"]:not(article[data-xe-exempt] *),
+html[data-xe-videos="hide"] [data-testid="videoPlayer"]:not(article[data-xe-exempt] *),
+html[data-xe-videos="hide"] [data-testid="videoComponent"]:not(article[data-xe-exempt] *) {
+  display: none !important;
+}
+html[data-xe-images="blur"] [data-testid="tweetPhoto"]:not([data-xe-reveal]):not(article[data-xe-exempt] *),
+html[data-xe-images="blur"] [data-testid="card.layoutLarge.media"]:not(article[data-xe-exempt] *),
+html[data-xe-videos="blur"] [data-testid="videoPlayer"]:not([data-xe-reveal]):not(article[data-xe-exempt] *) {
+  filter: blur(28px) !important;
+  cursor: pointer;
+}
+
+/* ---- Sidebar clutter ---- */
+html[data-xe-trending="hide"] [data-testid="trend"],
+html[data-xe-trending="hide"] section[aria-labelledby][role="region"]:has([data-testid="trend"]),
+html[data-xe-trending="hide"] [aria-label="Timeline: Trending now"],
+html[data-xe-trending="hide"] [aria-label="Trending"],
+html[data-xe-wtf="hide"] aside[aria-label="Who to follow"],
+html[data-xe-wtf="hide"] [data-testid="UserCell"]:not([data-testid="primaryColumn"] *) {
+  display: none !important;
+}
+
+/* ---- Per-tweet flags set by content.js ---- */
+html[data-xe-on] [data-xe-hide] { display: none !important; }
+html[data-xe-seen="dim"] [data-xe-seen] { opacity: .38; }
+html[data-xe-seen="hide"] [data-xe-seen] { display: none !important; }
+
+/* ---- Upsells ---- */
+html[data-xe-hide-ads] aside[aria-label="Subscribe to Premium"],
+html[data-xe-hide-ads] a[href="/i/premium_sign_up"],
+html[data-xe-hide-ads] a[href="/i/grok"],
+html[data-xe-hide-ads] [data-testid="GrokDrawer"],
+html[data-xe-hide-ads] [data-testid="premium-upsell"] { display: none !important; }
+
+/* ---- Metrics ---- */
+html[data-xe-metrics="hide"] article [role="group"] [data-testid="app-text-transition-container"],
+html[data-xe-metrics="hide"] article a[href$="/analytics"] { display: none !important; }
+
+/* ---- Collapse button + collapsed state ---- */
+.xe-collapse {
+  margin-left: 8px; border: 0; border-radius: 4px; padding: 0 6px; cursor: pointer;
+  background: rgba(128,128,128,.25); color: inherit; font: inherit; line-height: 1.2;
+}
+html:not([data-xe-on]) .xe-collapse { display: none; }
+article[data-xe-collapsed] [data-testid="tweetText"],
+article[data-xe-collapsed] [data-testid="tweetPhoto"],
+article[data-xe-collapsed] [data-testid="videoPlayer"],
+article[data-xe-collapsed] [data-testid="card.wrapper"],
+article[data-xe-collapsed] [role="group"],
+article[data-xe-collapsed] div[role="link"] { display: none !important; }
+
+/* ---- Typography (applies whenever enabled) ---- */
+html[data-xe-on] [data-testid="tweetText"] {
+  font-size: var(--xe-font-size, 15px) !important;
+  line-height: var(--xe-line-height, 1.4) !important;
+}
+html[data-xe-font="serif"] body, html[data-xe-font="serif"] body * { font-family: Georgia, "Times New Roman", serif !important; }
+html[data-xe-font="mono"] body, html[data-xe-font="mono"] body * { font-family: ui-monospace, Menlo, Consolas, monospace !important; }
+html[data-xe-font="system"] body, html[data-xe-font="system"] body * { font-family: system-ui, sans-serif !important; }
+
+/* ---- Density ---- */
+html[data-xe-density="compact"] [data-testid="tweetText"] { font-size: calc(var(--xe-font-size, 15px) - 1px) !important; }
+html[data-xe-density="compact"] article [data-testid="tweetPhoto"],
+html[data-xe-density="compact"] article [data-testid="videoPlayer"] { max-height: 150px; overflow: hidden; }
+html[data-xe-density="compact"] article [role="group"] { margin-top: -6px; }
+html[data-xe-density="text"] article [data-testid="tweetPhoto"],
+html[data-xe-density="text"] article [data-testid="videoPlayer"],
+html[data-xe-density="text"] article [data-testid="card.wrapper"],
+html[data-xe-density="text"] article [data-testid="User-Name"] ~ div [data-testid="Tweet-User-Avatar"] { display: none !important; }
+
+/* ---- Minimal mode: one centered, text-first column ---- */
+html[data-xe-minimal] [data-testid="sidebarColumn"],
+html[data-xe-minimal] [data-testid="DMDrawer"],
+html[data-xe-minimal] [data-testid="GrokDrawer"],
+html[data-xe-minimal] aside[aria-label="Subscribe to Premium"],
+html[data-xe-minimal] header[role="banner"] nav a:not([data-testid="AppTabBar_Home_Link"]):not([data-testid="AppTabBar_Notifications_Link"]):not([data-testid="AppTabBar_Profile_Link"]),
+html[data-xe-minimal] header[role="banner"] nav button,
+html[data-xe-minimal] [data-testid="SideNav_NewTweet_Button"],
+html[data-xe-minimal] [data-testid="FloatingActionButtons_Tweet_Button"] { display: none !important; }
+html[data-xe-minimal] main[role="main"] { justify-content: center !important; }
+html[data-xe-minimal] [data-testid="primaryColumn"] {
+  max-width: var(--xe-column-width, 600px) !important;
+  width: 100% !important;
+}
+html[data-xe-minimal] article [data-testid="Tweet-User-Avatar"] { transform: scale(.8); transform-origin: top left; }
+
+/* ---- Themes (best effort; X styles via classes so we set key surfaces) ---- */
+html[data-xe-theme] { --xe-accent: #1d9bf0; }
+html[data-xe-theme="amoled"]    { --xe-bg:#000;    --xe-fg:#e7e9ea; --xe-border:#1c1c1c; }
+html[data-xe-theme="sepia"]     { --xe-bg:#f4ecd8; --xe-fg:#433422; --xe-border:#d9ccae; }
+html[data-xe-theme="nord"]      { --xe-bg:#2e3440; --xe-fg:#eceff4; --xe-border:#434c5e; --xe-accent:#88c0d0; }
+html[data-xe-theme="solarized"] { --xe-bg:#002b36; --xe-fg:#93a1a1; --xe-border:#0b3c49; --xe-accent:#268bd2; }
+html[data-xe-theme] body,
+html[data-xe-theme] header[role="banner"],
+html[data-xe-theme] [data-testid="primaryColumn"],
+html[data-xe-theme] [data-testid="sidebarColumn"],
+html[data-xe-theme] main[role="main"] { background-color: var(--xe-bg) !important; }
+html[data-xe-theme] [data-testid="tweetText"],
+html[data-xe-theme] [data-testid="User-Name"] span,
+html[data-xe-theme] [data-testid="tweetText"] span:not(a *) { color: var(--xe-fg) !important; }
+html[data-xe-theme] [data-testid="tweetText"] a,
+html[data-xe-theme] [data-testid="tweetText"] a span { color: var(--xe-accent) !important; }
+html[data-xe-theme] [data-testid="primaryColumn"] { border-color: var(--xe-border) !important; }
+html[data-xe-theme] [data-testid="cellInnerDiv"] > div { border-color: var(--xe-border) !important; }

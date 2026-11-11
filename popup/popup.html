@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>X Enhancer</title>
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+<header>
+  <h1>X Enhancer</h1>
+  <label class="switch" title="Master switch (Alt+M)"><input type="checkbox" data-key="enabled"><span></span></label>
+</header>
+
+<nav class="tabs">
+  <button data-tab="media" class="active">Media</button>
+  <button data-tab="feed">Feed</button>
+  <button data-tab="filters">Filters</button>
+  <button data-tab="look">Look</button>
+</nav>
+
+<section id="media" class="pane active">
+  <label>Images <select data-key="images"><option value="off">Show</option><option value="blur">Blur</option><option value="hide">Hide</option></select></label>
+  <label>Videos <select data-key="videos"><option value="off">Show</option><option value="blur">Blur</option><option value="hide">Hide</option></select></label>
+  <label class="chk"><input type="checkbox" data-key="hideTrending"> Hide Trending / What's happening</label>
+  <label class="chk"><input type="checkbox" data-key="hideWhoToFollow"> Hide Who to follow</label>
+  <label class="col">Always show media from (one @handle per line)
+    <textarea data-key="exceptions" rows="3" placeholder="@friend"></textarea></label>
+</section>
+
+<section id="feed" class="pane">
+  <label class="chk"><input type="checkbox" data-key="minimal"> Minimal mode (single centered column)</label>
+  <label>Density <select data-key="density"><option value="large">Large</option><option value="compact">Compact</option><option value="text">Text-only</option></select></label>
+  <label>Seen posts <select data-key="seen"><option value="off">Normal</option><option value="dim">Dim</option><option value="hide">Hide</option></select></label>
+  <label class="chk"><input type="checkbox" data-key="collapseThreads"> Collapse button on posts</label>
+  <label class="chk"><input type="checkbox" data-key="keyboard"> Press <kbd>x</kbd> to collapse a post</label>
+  <label class="chk"><input type="checkbox" data-key="followingTab"> Open the Following tab on Home</label>
+  <label class="chk"><input type="checkbox" data-key="hideMetrics"> Hide like/repost/view counts</label>
+</section>
+
+<section id="filters" class="pane">
+  <label class="chk"><input type="checkbox" data-key="hideAds"> Hide ads &amp; Premium/Grok upsells</label>
+  <label class="chk"><input type="checkbox" data-key="hideReposts"> Hide reposts</label>
+  <label class="chk"><input type="checkbox" data-key="hideQuotes"> Hide quote posts</label>
+  <label class="chk"><input type="checkbox" data-key="hideReplies"> Hide replies in timelines</label>
+  <label class="col">Mute list: words, @accounts, or /regex/i (one per line, # comments)
+    <textarea data-key="mutes" rows="6" placeholder="crypto&#10;@spammer&#10;/giv+eaway/i"></textarea></label>
+</section>
+
+<section id="look" class="pane">
+  <label>Theme <select data-key="theme"><option value="default">X default</option><option value="amoled">AMOLED</option><option value="sepia">Sepia</option><option value="nord">Nord</option><option value="solarized">Solarized</option></select></label>
+  <label>Accent <input type="color" data-key="accent" value="#1d9bf0"></label>
+  <label>Font <select data-key="fontFamily"><option value="default">X default</option><option value="serif">Serif</option><option value="mono">Mono</option><option value="system">System</option></select></label>
+  <label>Font size <input type="range" min="12" max="24" step="1" data-key="fontSize"></label>
+  <label>Line height <input type="range" min="1.1" max="2" step="0.05" data-key="lineHeight"></label>
+  <label>Column width (minimal) <input type="range" min="400" max="900" step="20" data-key="columnWidth"></label>
+</section>
+
+<script src="../lib/settings.js"></script>
+<script src="popup.js"></script>
+</body>
+</html>

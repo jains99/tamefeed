@@ -60,3 +60,9 @@ test('collapse attribute follows collapseThreads and master switch', () => {
   assert.strictEqual(S.toAttributes(S.merge({ collapseThreads: false }))['data-xe-collapse'], undefined);
   assert.strictEqual(S.toAttributes(S.merge({ enabled: false, collapseThreads: true }))['data-xe-collapse'], undefined);
 });
+
+test('peek also overrides text-only density so media can show', () => {
+  assert.strictEqual(S.toAttributes(S.merge({ density: 'text' }))['data-xe-density'], 'text');
+  assert.notStrictEqual(S.toAttributes(S.merge({ density: 'text' }), { peek: true })['data-xe-density'], 'text');
+  assert.strictEqual(S.toAttributes(S.merge({ density: 'compact' }), { peek: true })['data-xe-density'], 'compact');
+});

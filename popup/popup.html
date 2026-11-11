@@ -12,14 +12,8 @@
   <label class="switch" title="Master switch (Alt+M)"><input type="checkbox" data-key="enabled"><span></span></label>
 </header>
 
-<nav class="tabs">
-  <button data-tab="media" class="active">Media</button>
-  <button data-tab="feed">Feed</button>
-  <button data-tab="filters">Filters</button>
-  <button data-tab="look">Look</button>
-</nav>
-
-<section id="media" class="pane active">
+<section id="media" class="pane">
+  <h2>Media</h2>
   <label>Images <select data-key="images"><option value="off">Show</option><option value="blur">Blur</option><option value="hide">Hide</option></select></label>
   <label>Videos <select data-key="videos"><option value="off">Show</option><option value="blur">Blur</option><option value="hide">Hide</option></select></label>
   <label class="chk"><input type="checkbox" data-key="hideTrending"> Hide Trending / What's happening</label>
@@ -30,6 +24,7 @@
 </section>
 
 <section id="feed" class="pane">
+  <h2>Feed</h2>
   <label class="chk"><input type="checkbox" data-key="minimal"> Minimal mode (single centered column)</label>
   <label>Density <select data-key="density"><option value="large">Large</option><option value="compact">Compact</option><option value="text">Text-only</option></select></label>
   <label>Seen posts <select data-key="seen"><option value="off">Normal</option><option value="dim">Dim</option><option value="hide">Hide</option></select></label>
@@ -40,6 +35,7 @@
 </section>
 
 <section id="filters" class="pane">
+  <h2>Filters</h2>
   <label class="chk"><input type="checkbox" data-key="hideAds"> Hide ads &amp; Premium/Grok upsells</label>
   <label class="chk"><input type="checkbox" data-key="hideReposts"> Hide reposts</label>
   <label class="chk"><input type="checkbox" data-key="hideQuotes"> Hide quote posts</label>
@@ -49,6 +45,7 @@
 </section>
 
 <section id="look" class="pane">
+  <h2>Look</h2>
   <label>Theme <select data-key="theme"><option value="default">X default</option><option value="amoled">AMOLED</option><option value="sepia">Sepia</option><option value="nord">Nord</option><option value="solarized">Solarized</option></select></label>
   <label>Accent <input type="color" data-key="accent" value="#1d9bf0"></label>
   <label>Font <select data-key="fontFamily"><option value="default">X default</option><option value="serif">Serif</option><option value="mono">Mono</option><option value="system">System</option></select></label>

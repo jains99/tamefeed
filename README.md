@@ -8,7 +8,9 @@ Chrome (MV3) extension for x.com / twitter.com. Does what Twitter Media Blocker 
 3. Pin the toolbar icon. **Alt+M** toggles everything (rebind at `chrome://extensions/shortcuts`).
 
 ## Features
-| Tab | Options |
+The popup is one scrolling page with these sections:
+
+| Section | Options |
 |---|---|
 | Media | Images/videos: show, blur (click to reveal) or hide. Hide Trending and Who to follow. Per-account media exceptions. Press `v` to show all blocked media in the timeline, press again to re-block (resets on page reload). |
 | Feed | Minimal mode, density (large/compact/text-only), dim or hide seen posts, collapse button and `x` key, open Following tab, hide counts. |

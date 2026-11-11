@@ -1,4 +1,4 @@
-/* X Enhancer v0.1.0 - popup/options UI: binds [data-key] controls to chrome.storage.sync */
+/* X Enhancer v0.1.0 - popup/options UI (single page, sectioned): binds [data-key] controls to chrome.storage.sync */
 (function () {
   const S = window.XESettings;
   let settings = S.merge();
@@ -30,12 +30,6 @@
       save();
     });
   });
-
-  document.querySelectorAll('.tabs button').forEach((b) => b.addEventListener('click', () => {
-    document.querySelectorAll('.tabs button, .pane').forEach((n) => n.classList.remove('active'));
-    b.classList.add('active');
-    document.getElementById(b.dataset.tab).classList.add('active');
-  }));
 
   chrome.storage.sync.get('settings', (r) => { settings = S.merge(r.settings); render(); });
   chrome.storage.onChanged.addListener((ch, area) => {

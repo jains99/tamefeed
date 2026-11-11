@@ -1,4 +1,4 @@
-// x_enhancer tests v0.1.0 - filters, exceptions, seen-set
+// TameFeed tests v0.1.0 - filters, exceptions, seen-set
 const test = require('node:test');
 const assert = require('node:assert');
 const F = require('../lib/filters.js');

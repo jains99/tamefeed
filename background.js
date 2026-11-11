@@ -1,4 +1,4 @@
-/* X Enhancer v0.1.0 - service worker: Alt+M master toggle */
+/* TameFeed v0.1.0 - service worker: Alt+M master toggle */
 importScripts('lib/settings.js');
 
 chrome.commands.onCommand.addListener(async (cmd) => {

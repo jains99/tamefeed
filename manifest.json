@@ -1,17 +1,17 @@
 {
   "manifest_version": 3,
-  "name": "X Enhancer",
+  "name": "TameFeed",
   "version": "0.1.0",
   "description": "Block media, hide clutter and browse X in a minimal, Apollo-style reading layout.",
   "permissions": ["storage"],
   "host_permissions": ["https://x.com/*", "https://twitter.com/*"],
   "background": { "service_worker": "background.js" },
-  "action": { "default_popup": "popup/popup.html", "default_title": "X Enhancer" },
+  "action": { "default_popup": "popup/popup.html", "default_title": "TameFeed" },
   "options_ui": { "page": "popup/popup.html", "open_in_tab": true },
   "commands": {
     "toggle-enabled": {
       "suggested_key": { "default": "Alt+M" },
-      "description": "Toggle X Enhancer on/off"
+      "description": "Toggle TameFeed on/off"
     }
   },
   "content_scripts": [

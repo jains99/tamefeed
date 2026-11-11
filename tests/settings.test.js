@@ -1,4 +1,4 @@
-// x_enhancer tests v0.1.0 - settings logic
+// TameFeed tests v0.1.0 - settings logic
 const test = require('node:test');
 const assert = require('node:assert');
 const S = require('../lib/settings.js');

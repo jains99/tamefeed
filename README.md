@@ -1,4 +1,4 @@
-# X Enhancer
+# TameFeed
 
 Chrome (MV3) extension for x.com / twitter.com. Does what Twitter Media Blocker does, plus a minimal reading mode and Apollo-for-Reddit-style features.
 
@@ -27,3 +27,5 @@ Notes:
 - Pure logic is in `lib/` (settings, filters, seen) and unit-tested. DOM selectors are in `content/content.js` (`SEL`) and `content/styles.css`; fix there when X changes.
 - Settings: `chrome.storage.local` (`settings`; local rather than sync because sync's 8 KB per-item quota breaks long mute lists, so settings do not follow you across devices). Seen ids: `chrome.storage.local` (`seen`).
 - Permissions: `storage` and x.com/twitter.com hosts only. No data leaves the browser.
+
+The project folder is still named `x_enhancer` (renaming it would change the unpacked extension's ID in Chrome); the product name is TameFeed.

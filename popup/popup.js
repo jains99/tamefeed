@@ -1,4 +1,4 @@
-/* X Enhancer v0.1.0 - popup/options UI (single page, sectioned): binds [data-key] controls to chrome.storage.local */
+/* TameFeed v0.1.0 - popup/options UI (single page, sectioned): binds [data-key] controls to chrome.storage.local */
 (function () {
   const S = window.XESettings;
   let settings = S.merge();

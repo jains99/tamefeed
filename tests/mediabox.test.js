@@ -1,4 +1,4 @@
-// x_enhancer tests v0.1.0 - finding the wrapper box around a media element
+// TameFeed tests v0.1.0 - finding the wrapper box around a media element
 const test = require('node:test');
 const assert = require('node:assert');
 const MB = require('../lib/mediabox.js');

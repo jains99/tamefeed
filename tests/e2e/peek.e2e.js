@@ -1,4 +1,4 @@
-// x_enhancer e2e v0.1.0 - loads the unpacked extension in Chromium and checks the 'v' peek on a live post.
+// TameFeed e2e v0.1.0 - loads the unpacked extension in Chromium and checks the 'v' peek on a live post.
 // Needs network + playwright-core (not part of `npm test`):
 //   NODE_PATH=<dir>/node_modules node tests/e2e/peek.e2e.js <post-url> [images-mode] [out-dir]
 const { chromium } = require('playwright-core');

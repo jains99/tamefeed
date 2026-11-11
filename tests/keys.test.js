@@ -1,4 +1,4 @@
-// x_enhancer tests v0.1.0 - shortcut key matching
+// TameFeed tests v0.1.0 - shortcut key matching
 const test = require('node:test');
 const assert = require('node:assert');
 const K = require('../lib/keys.js');

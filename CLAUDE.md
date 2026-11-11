@@ -1,4 +1,4 @@
-# CLAUDE.md – x_enhancer
+# CLAUDE.md – TameFeed
 
 Chrome MV3 extension for X. See README.md for features.
 

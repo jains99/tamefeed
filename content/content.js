@@ -1,4 +1,4 @@
-/* X Enhancer v0.1.0 - content script: applies settings as html attributes and
+/* TameFeed v0.1.0 - content script: applies settings as html attributes and
  * processes tweets (mutes, reposts/quotes/replies, ads, exceptions, seen, collapse).
  * All DOM selectors live in SEL so X markup changes are a one-line fix. */
 (function () {

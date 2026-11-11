@@ -1,4 +1,4 @@
-// x_enhancer tests v0.1.0 - static checks: manifest validity, referenced files exist, JS syntax
+// TameFeed tests v0.1.0 - static checks: manifest validity, referenced files exist, JS syntax
 const fs = require('node:fs'), path = require('node:path'), cp = require('node:child_process');
 const root = path.join(__dirname, '..');
 const m = JSON.parse(fs.readFileSync(path.join(root, 'manifest.json'), 'utf8'));

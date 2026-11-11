@@ -1,4 +1,4 @@
-/* X Enhancer v0.1.0 - popup / options page */
+/* TameFeed v0.1.0 - popup / options page */
 :root { --bg:#fff; --fg:#0f1419; --muted:#536471; --line:#e1e8ed; --accent:#1d9bf0; }
 @media (prefers-color-scheme: dark) { :root { --bg:#15202b; --fg:#e7e9ea; --muted:#8b98a5; --line:#2f3b47; } }
 * { box-sizing: border-box; }

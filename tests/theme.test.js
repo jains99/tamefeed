@@ -1,4 +1,4 @@
-// x_enhancer tests v0.1.0 - every theme palette in styles.css must be readable (WCAG AA 4.5:1)
+// TameFeed tests v0.1.0 - every theme palette in styles.css must be readable (WCAG AA 4.5:1)
 const test = require('node:test');
 const assert = require('node:assert');
 const fs = require('node:fs');

@@ -1,4 +1,4 @@
-/* X Enhancer v0.1.0 - all rules keyed off data-xe-* attributes on <html>.
+/* TameFeed v0.1.0 - all rules keyed off data-xe-* attributes on <html>.
  * Selectors rely on X's data-testid hooks; update here if X changes markup. */
 
 /* ---- Media blocking (exempt accounts keep their media) ---- */

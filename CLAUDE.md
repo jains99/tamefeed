@@ -13,5 +13,6 @@ Chrome MV3 extension for X. See README.md for features.
 
 ## Rules
 - Adding a setting: update `DEFAULTS`/`toAttributes` in `lib/settings.js`, add a test, add a `data-key` control in `popup.html`, add CSS.
+- Keyboard: do NOT add plain-letter shortcuts without checking X's own list (press `?` on x.com); `x` opens X's Block dialog. `tests/check.js` fails if any plain key other than `v` is registered.
 - Tests first; run `npm test`. No browser testing unless asked.
 - Bump the version in `manifest.json`, `package.json` and file headers on release.

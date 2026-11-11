@@ -13,12 +13,12 @@ The popup is one scrolling page with these sections:
 | Section | Options |
 |---|---|
 | Media | Images/videos: show, blur (click to reveal) or hide. Hide Trending and Who to follow. Per-account media exceptions. Press `v` to show all blocked media in the timeline, press again to re-block (resets on page reload). A small toast confirms each press. |
-| Feed | Minimal mode, density (large/compact/text-only), dim or hide seen posts, collapse button and `x` key, open Following tab, hide counts. |
+| Feed | Minimal mode, density (large/compact/text-only), dim or hide seen posts, collapse button on posts, open Following tab, hide counts. |
 | Filters | Hide ads and Premium/Grok upsells, hide reposts, quotes or replies, mute list (words, `@accounts`, `/regex/i`; one rule per line, `g`/`y` flags ignored). |
 | Look | Themes (AMOLED, Sepia, Nord, Solarized), accent, font, size, line height, minimal column width. |
 
 Notes:
-- X already supports `j`/`k` (next/previous) and `l` (like), so the extension only adds `x` (collapse) and `v` (peek at all media). Shortcuts are ignored in text fields and with Ctrl/Cmd/Alt/Shift held.
+- The only keyboard shortcut is `v` (peek at all media) plus Alt+M (master switch). X itself binds many plain letters (for example `x` opens the Block dialog, `u` mute, `b`, `l`, `r`, `t`, `s`, `n`), so the extension deliberately registers no others; posts collapse via the – button. `v` is ignored in text fields and with Ctrl/Cmd/Alt/Shift held. `tests/check.js` guards this.
 - Seen tracking records post ids you scrolled past (max 5000, stored locally). Dim/hide applies on the next page load.
 - Themes and density are best-effort overrides; X's markup changes often.
 

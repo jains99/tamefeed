@@ -36,6 +36,7 @@ Notes:
 Notes:
 - Icons are generated: `python3 scripts/make_icons.py` (needs Pillow) rewrites `icons/icon{16,32,48,128}.png`.
 - Privacy policy URL for the store listing: https://github.com/jains99/tamefeed/blob/master/PRIVACY.md
+- Store promo tiles live in `store/` (440x280 and 1400x560, 24-bit PNG); `python3 scripts/make_store_assets.py` regenerates them. Screenshots (1280x800 or 640x400, no alpha) are real captures you add by hand.
 - Keep third-party product names out of the manifest description and the store listing. `tests/check.js` guards the description, the icons, and the absence of `host_permissions`.
 
 The project folder is still named `x_enhancer` (renaming it would change the unpacked extension's ID in Chrome); the product name is TameFeed.

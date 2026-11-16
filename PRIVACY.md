@@ -26,4 +26,4 @@ TameFeed reads the content of x.com and twitter.com pages only to hide, blur or 
 Uninstalling TameFeed deletes everything it stored.
 
 ## Contact
-Open an issue on the project's repository.
+Open an issue at https://github.com/jains99/tamefeed/issues.

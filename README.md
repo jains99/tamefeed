@@ -35,7 +35,7 @@ Notes:
 
 Notes:
 - Icons are generated: `python3 scripts/make_icons.py` (needs Pillow) rewrites `icons/icon{16,32,48,128}.png`.
-- The store listing needs a public URL for the privacy policy. Host `PRIVACY.md` somewhere public and add a real contact to it first.
+- Privacy policy URL for the store listing: https://github.com/jains99/tamefeed/blob/master/PRIVACY.md
 - Keep third-party product names out of the manifest description and the store listing. `tests/check.js` guards the description, the icons, and the absence of `host_permissions`.
 
 The project folder is still named `x_enhancer` (renaming it would change the unpacked extension's ID in Chrome); the product name is TameFeed.

@@ -1,4 +1,4 @@
-// TameFeed tests v0.1.0 - static checks: manifest validity, referenced files exist, JS syntax
+// TameFeed tests v0.1.0 - static checks: manifest validity, referenced files exist, JS syntax, shortcut/CSS/store-packaging guards
 const fs = require('node:fs'), path = require('node:path'), cp = require('node:child_process');
 const root = path.join(__dirname, '..');
 const m = JSON.parse(fs.readFileSync(path.join(root, 'manifest.json'), 'utf8'));
@@ -30,3 +30,21 @@ if (/\[role="group"\]\s*\{[^}]*margin-top:\s*-/.test(stylesCss)) {
   process.exit(1);
 }
 console.log('overlap guard ok');
+
+// Guard: Chrome Web Store packaging. Icons must be declared and be real PNGs of the stated size,
+// host_permissions stays out (content_scripts.matches already grants access), the description must not
+// name third-party products, and a privacy policy must exist.
+let storeBad = 0;
+for (const size of ['16', '32', '48', '128']) {
+  const f = m.icons && m.icons[size];
+  if (!f || !fs.existsSync(path.join(root, f))) { console.error('missing icon', size); storeBad++; continue; }
+  const b = fs.readFileSync(path.join(root, f));
+  const isPng = b.subarray(1, 4).toString() === 'PNG';
+  if (!isPng || b.readUInt32BE(16) !== +size || b.readUInt32BE(20) !== +size) { console.error('icon is not a', size, 'px PNG:', f); storeBad++; }
+}
+if (m.host_permissions) { console.error('manifest: host_permissions is redundant, remove it'); storeBad++; }
+if (/apollo|media blocker/i.test(m.description)) { console.error('manifest: description names a third-party product'); storeBad++; }
+if (m.description.length > 132) { console.error('manifest: description over 132 characters'); storeBad++; }
+if (!fs.existsSync(path.join(root, 'PRIVACY.md'))) { console.error('missing PRIVACY.md'); storeBad++; }
+if (storeBad) process.exit(1);
+console.log('store packaging guard ok');

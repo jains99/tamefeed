@@ -2,5 +2,5 @@
   "name": "tamefeed",
   "version": "0.1.0",
   "private": true,
-  "scripts": { "test": "node --test tests/ && node tests/check.js" }
+  "scripts": { "test": "node --test tests/ && node tests/check.js", "build": "node scripts/build.js" }
 }

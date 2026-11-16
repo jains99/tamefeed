@@ -26,6 +26,16 @@ Notes:
 - `npm test` runs unit tests (`node --test`) and static checks (manifest, syntax).
 - Pure logic is in `lib/` (settings, filters, seen) and unit-tested. DOM selectors are in `content/content.js` (`SEL`) and `content/styles.css`; fix there when X changes.
 - Settings: `chrome.storage.local` (`settings`; local rather than sync because sync's 8 KB per-item quota breaks long mute lists, so settings do not follow you across devices). Seen ids: `chrome.storage.local` (`seen`).
-- Permissions: `storage` and x.com/twitter.com hosts only. No data leaves the browser.
+- Permissions: `storage`, plus content scripts on x.com/twitter.com only (no `host_permissions`; the content script `matches` already grant access). No data leaves the browser; see [PRIVACY.md](PRIVACY.md).
+
+## Publish to the Chrome Web Store
+1. Bump the version in `manifest.json`, `package.json` and the file headers.
+2. Run `npm test`, then `npm run build`. This writes `dist/tamefeed-<version>.zip` with runtime files only (`manifest.json`, `background.js`, `content/`, `lib/`, `popup/`, `icons/`). It needs the `zip` CLI.
+3. Upload the zip in the [Developer Dashboard](https://chrome.google.com/webstore/devconsole).
+
+Notes:
+- Icons are generated: `python3 scripts/make_icons.py` (needs Pillow) rewrites `icons/icon{16,32,48,128}.png`.
+- The store listing needs a public URL for the privacy policy. Host `PRIVACY.md` somewhere public and add a real contact to it first.
+- Keep third-party product names out of the manifest description and the store listing. `tests/check.js` guards the description, the icons, and the absence of `host_permissions`.
 
 The project folder is still named `x_enhancer` (renaming it would change the unpacked extension's ID in Chrome); the product name is TameFeed.

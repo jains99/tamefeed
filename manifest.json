@@ -2,11 +2,11 @@
   "manifest_version": 3,
   "name": "TameFeed",
   "version": "0.1.0",
-  "description": "Block media, hide clutter and browse X in a minimal, Apollo-style reading layout.",
+  "description": "Block media, hide clutter and read X in a minimal, distraction-free layout. Unofficial; not affiliated with X Corp.",
+  "icons": { "16": "icons/icon16.png", "32": "icons/icon32.png", "48": "icons/icon48.png", "128": "icons/icon128.png" },
   "permissions": ["storage"],
-  "host_permissions": ["https://x.com/*", "https://twitter.com/*"],
   "background": { "service_worker": "background.js" },
-  "action": { "default_popup": "popup/popup.html", "default_title": "TameFeed" },
+  "action": { "default_popup": "popup/popup.html", "default_title": "TameFeed", "default_icon": { "16": "icons/icon16.png", "32": "icons/icon32.png" } },
   "options_ui": { "page": "popup/popup.html", "open_in_tab": true },
   "commands": {
     "toggle-enabled": {

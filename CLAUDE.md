@@ -19,3 +19,14 @@ Chrome MV3 extension for X. See README.md for features.
 - Tests first; run `npm test`. No browser testing unless asked.
 - Store packaging: no `host_permissions` (content script `matches` suffice), no third-party product names in the manifest description, new runtime directories must be added to `DIRS` in `scripts/build.js`. `tests/check.js` and `tests/build.test.js` enforce this. Keep `PRIVACY.md` accurate when stored data or permissions change.
 - Bump the version in `manifest.json`, `package.json` and file headers on release.
+
+## Publish to the Chrome Web Store
+1. Bump the version in `manifest.json`, `package.json` and the file headers.
+2. Run `npm test`, then `npm run build`. This writes `dist/tamefeed-<version>.zip` with runtime files only (`manifest.json`, `background.js`, `content/`, `lib/`, `popup/`, `icons/`). It needs the `zip` CLI.
+3. Upload the zip in the [Developer Dashboard](https://chrome.google.com/webstore/devconsole).
+
+Notes:
+- Icons are generated: `python3 scripts/make_icons.py` (needs Pillow) rewrites `icons/icon{16,32,48,128}.png`.
+- Privacy policy URL for the store listing: https://github.com/jains99/tamefeed/blob/master/PRIVACY.md
+- Store promo tiles live in `store/` (440x280 and 1400x560, 24-bit PNG); `python3 scripts/make_store_assets.py` regenerates them. Screenshots (1280x800 or 640x400, no alpha) are real captures you add by hand.
+- Keep third-party product names out of the manifest description and the store listing. `tests/check.js` guards the description, the icons, and the absence of `host_permissions`.

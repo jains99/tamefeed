@@ -1,11 +1,17 @@
-# TameFeed
+<h1><img src="icons/icon48.png" alt="" width="32" height="32"> TameFeed</h1>
 
-Chrome (MV3) extension for x.com / twitter.com. Does what Twitter Media Blocker does, plus a minimal reading mode and Apollo-for-Reddit-style features.
+A Chrome extension that blocks media, hides clutter and gives X (x.com / twitter.com) a minimal, distraction-free reading layout.
 
-## Install (unpacked)
-1. Open `chrome://extensions`, enable **Developer mode**.
-2. **Load unpacked** and select this folder.
-3. Pin the toolbar icon. **Alt+M** toggles everything (rebind at `chrome://extensions/shortcuts`).
+Unofficial; not affiliated with X Corp.
+
+## Install
+**Chrome Web Store:** link coming once the listing is approved.
+
+**From source:**
+1. Download or clone this repository.
+2. Open `chrome://extensions` and enable **Developer mode**.
+3. Click **Load unpacked** and select the repository folder.
+4. Pin the toolbar icon. **Alt+M** toggles everything (rebind at `chrome://extensions/shortcuts`).
 
 ## Features
 The popup is one scrolling page with these sections:
@@ -22,21 +28,11 @@ Notes:
 - Seen tracking records post ids you scrolled past (max 5000, stored locally). Dim/hide applies on the next page load.
 - Themes and density are best-effort overrides; X's markup changes often. `tests/theme.test.js` checks every theme palette for 4.5:1 contrast (text, muted text, links).
 
+## Privacy
+TameFeed makes no network requests. Your settings and the ids of posts you have seen stay in your browser's local extension storage, and nothing is collected or shared. See [PRIVACY.md](PRIVACY.md).
+
 ## Develop
 - `npm test` runs unit tests (`node --test`) and static checks (manifest, syntax).
 - Pure logic is in `lib/` (settings, filters, seen) and unit-tested. DOM selectors are in `content/content.js` (`SEL`) and `content/styles.css`; fix there when X changes.
 - Settings: `chrome.storage.local` (`settings`; local rather than sync because sync's 8 KB per-item quota breaks long mute lists, so settings do not follow you across devices). Seen ids: `chrome.storage.local` (`seen`).
 - Permissions: `storage`, plus content scripts on x.com/twitter.com only (no `host_permissions`; the content script `matches` already grant access). No data leaves the browser; see [PRIVACY.md](PRIVACY.md).
-
-## Publish to the Chrome Web Store
-1. Bump the version in `manifest.json`, `package.json` and the file headers.
-2. Run `npm test`, then `npm run build`. This writes `dist/tamefeed-<version>.zip` with runtime files only (`manifest.json`, `background.js`, `content/`, `lib/`, `popup/`, `icons/`). It needs the `zip` CLI.
-3. Upload the zip in the [Developer Dashboard](https://chrome.google.com/webstore/devconsole).
-
-Notes:
-- Icons are generated: `python3 scripts/make_icons.py` (needs Pillow) rewrites `icons/icon{16,32,48,128}.png`.
-- Privacy policy URL for the store listing: https://github.com/jains99/tamefeed/blob/master/PRIVACY.md
-- Store promo tiles live in `store/` (440x280 and 1400x560, 24-bit PNG); `python3 scripts/make_store_assets.py` regenerates them. Screenshots (1280x800 or 640x400, no alpha) are real captures you add by hand.
-- Keep third-party product names out of the manifest description and the store listing. `tests/check.js` guards the description, the icons, and the absence of `host_permissions`.
-
-The project folder is still named `x_enhancer` (renaming it would change the unpacked extension's ID in Chrome); the product name is TameFeed.

@@ -4,6 +4,8 @@ A Chrome extension that blocks media, hides clutter and gives X (x.com / twitter
 
 Unofficial; not affiliated with X Corp.
 
+<p align="center"><img src="store/promo-marquee-1400x560.png" alt="TameFeed: block media, hide clutter, just read" width="700"></p>
+
 ## Install
 **Chrome Web Store:** [Install TameFeed](https://chromewebstore.google.com/detail/tamefeed/mlaambbjfpbjdmfbaamclapnfcdffjnj)
 
@@ -12,6 +14,13 @@ Unofficial; not affiliated with X Corp.
 2. Open `chrome://extensions` and enable **Developer mode**.
 3. Click **Load unpacked** and select the repository folder.
 4. Pin the toolbar icon. **Alt+M** toggles everything (rebind at `chrome://extensions/shortcuts`).
+
+## Screenshots
+Sepia theme, compact density, images blurred.
+
+<img src="store/screenshot-1-1280x800.png" alt="Minimal timeline in the Sepia theme with blurred images" width="640">
+
+<img src="store/screenshot-2-1280x800.png" alt="Settings popup: media blocking and feed options" width="640"> <img src="store/screenshot-3-1280x800.png" alt="Settings popup: filters, mute list and look options" width="640">
 
 ## Features
 The popup is one scrolling page with these sections:

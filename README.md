@@ -5,7 +5,7 @@ A Chrome extension that blocks media, hides clutter and gives X (x.com / twitter
 Unofficial; not affiliated with X Corp.
 
 ## Install
-**Chrome Web Store:** link coming once the listing is approved.
+**Chrome Web Store:** [Install TameFeed](https://chromewebstore.google.com/detail/tamefeed/mlaambbjfpbjdmfbaamclapnfcdffjnj)
 
 **From source:**
 1. Download or clone this repository.

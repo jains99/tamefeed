@@ -26,6 +26,7 @@ Chrome MV3 extension for X. See README.md for features.
 3. Upload the zip in the [Developer Dashboard](https://chrome.google.com/webstore/devconsole).
 
 Notes:
+- Live listing: https://chromewebstore.google.com/detail/tamefeed/mlaambbjfpbjdmfbaamclapnfcdffjnj (extension id mlaambbjfpbjdmfbaamclapnfcdffjnj). To ship an update, upload a new zip with a higher version to the same item in the Developer Dashboard.
 - Icons are generated: `python3 scripts/make_icons.py` (needs Pillow) rewrites `icons/icon{16,32,48,128}.png`.
 - Privacy policy URL for the store listing: https://github.com/jains99/tamefeed/blob/master/PRIVACY.md
 - Store promo tiles live in `store/` (440x280 and 1400x560, 24-bit PNG); `python3 scripts/make_store_assets.py` regenerates them. Screenshots (1280x800 or 640x400, no alpha) are real captures you add by hand.

@@ -48,3 +48,11 @@ if (m.description.length > 132) { console.error('manifest: description over 132 
 if (!fs.existsSync(path.join(root, 'PRIVACY.md'))) { console.error('missing PRIVACY.md'); storeBad++; }
 if (storeBad) process.exit(1);
 console.log('store packaging guard ok');
+
+// Guard: license. LICENSE file present and package.json declares the same license.
+const pkg = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
+if (!fs.existsSync(path.join(root, 'LICENSE')) || !/^MIT License/.test(fs.readFileSync(path.join(root, 'LICENSE'), 'utf8')) || pkg.license !== 'MIT') {
+  console.error('license: need an MIT LICENSE file and "license": "MIT" in package.json');
+  process.exit(1);
+}
+console.log('license guard ok');

@@ -36,3 +36,6 @@ TameFeed makes no network requests. Your settings and the ids of posts you have 
 - Pure logic is in `lib/` (settings, filters, seen) and unit-tested. DOM selectors are in `content/content.js` (`SEL`) and `content/styles.css`; fix there when X changes.
 - Settings: `chrome.storage.local` (`settings`; local rather than sync because sync's 8 KB per-item quota breaks long mute lists, so settings do not follow you across devices). Seen ids: `chrome.storage.local` (`seen`).
 - Permissions: `storage`, plus content scripts on x.com/twitter.com only (no `host_permissions`; the content script `matches` already grant access). No data leaves the browser; see [PRIVACY.md](PRIVACY.md).
+
+## License
+MIT. See [LICENSE](LICENSE).
